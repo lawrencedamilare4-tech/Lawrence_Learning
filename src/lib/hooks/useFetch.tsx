@@ -3,9 +3,9 @@ import axios from "axios";
 import type { IFetch } from "../types/components";
 
 export const useFetch = ({ url, method = "GET", body, headers }: IFetch) => {
-  const [data, setData] = useState<any | null>(null);
+  const [data, setData] = useState<any>();
   const [isLoading, setisLoading] = useState(false);
-  const [error, setError] = useState<any>(null);
+  const [error, setError] = useState<any>();
 
   useEffect(() => {
     if (!url) return;
@@ -13,8 +13,6 @@ export const useFetch = ({ url, method = "GET", body, headers }: IFetch) => {
     const fetchData = async () => {
       try {
         setisLoading(true);
-        setError(null);
-
         const res = await axios({
           url,
           method,
@@ -31,7 +29,7 @@ export const useFetch = ({ url, method = "GET", body, headers }: IFetch) => {
     };
 
     fetchData();
-  }, [url, method, JSON.stringify(body)]);
+  }, [url]);
 
   return { data, isLoading, error };
 };
