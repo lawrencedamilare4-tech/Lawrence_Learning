@@ -10,6 +10,7 @@ export const Button = ({
   loading,
   disabled,
   Icon,
+  iconPosition,
 }: ButtonProps) => {
   const colorMap = {
     primary: `${
@@ -36,11 +37,12 @@ export const Button = ({
       ${colorMap[variant]} disabled:opacity-50 
       disabled:cursor-not-allowed flex items-center`}
     >
-      {Icon && <Icon className="mr-1" />}
+      {Icon && iconPosition == "before" && <Icon className="mr-1" />}
       {loading && (
         <CircularProgress className="mr-2" color="inherit" size={16} />
       )}
       <span>{children}</span>
+      {Icon && iconPosition == "after" && <Icon className="ml-1" />}
     </button>
   );
 };
